@@ -1,0 +1,103 @@
+<div class="container">
+  <form autocomplete="off" (ngSubmit)="salvar()" [formGroup]="formulario">
+    <div class="ui-g">
+      <div class="ui-g-12 ui-fluid">
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Usuarios</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome"
+               formControlName="nome">
+
+        <app-message [control]="formulario.get('nome')" error="obrigatoriedade"
+                     text="Informe a nome"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>E-mail</label>
+        <input pInputText type="text" name="email"
+               formControlName="email">
+
+        <app-message [control]="formulario.get('email')" error="obrigatoriedade"
+                     text="Informe a e-mail"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Login</label>
+        <input pInputText type="text" name="login"
+               formControlName="login">
+
+        <app-message [control]="formulario.get('login')" error="obrigatoriedade"
+                     text="Informe a login"></app-message>
+      </div>
+
+      <div class="ui-g-6 ui-md-3 ui-fluid">
+        <label>Senha</label>
+        <input pInputText type="password" name="senha"
+               formControlName="senha">
+
+        <app-message [control]="formulario.get('senha')" error="obrigatoriedade"
+                     text="Informe a senha"></app-message>
+
+        <app-message [control]="formulario.get('senha')" error="tamanhoMinimo"
+                     text="Mínimo de {{ formulario.get('senha').errors?.tamanhoMinimo?.tamanho }} caracteres"></app-message>
+      </div>
+
+      <div class="ui-g-6 ui-md-3 ui-fluid">
+        <label>Criação</label>
+        <p-calendar name="dataCriacao" dateFormat="dd/mm/yy"
+                    [inline]="false" [readonlyInput]="true" [showIcon]="false" showTime="true" hourFormat="24"
+                    formControlName="dataCriacao"></p-calendar>
+
+        <app-message [control]="formulario.get('dataCriacao')" error="required"
+                     text="Informe uma data de criação"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>Código de Autorização</label>
+        <input pInputText type="text" name="codigoAutorizacao" size="1"
+               formControlName="codigoAutorizacao">
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>Tempo de Expiração da Senha</label>
+        <p-spinner pInputText name="tempoExpiracaoSenha" [min]="0"
+                   formControlName="tempoExpiracaoSenha"></p-spinner>
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>Status</label>
+        <input pInputText type="text" name="statusUsuario" size="1"
+               formControlName="statusUsuario">
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>Código Pessoa</label>
+        <p-spinner pInputText name="codigoPessoa" [min]="0"
+                   formControlName="codigoPessoa"></p-spinner>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid" formGroupName="perfil">
+        <label>Perfil</label>
+        <p-dropdown name="perfil" [options]="perfis"
+                    placeholder="Selecione" [autoWidth]="false"
+                    formControlName="id"></p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid" formGroupName="aparelho">
+        <label>Aparelho</label>
+        <p-dropdown name="pessoa" [options]="aparelhos" placeholder="Selecione"
+                    [autoWidth]="false" [filter]="true"
+                    formControlName="id"></p-dropdown>
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" [disabled]="formulario.invalid"></button>
+        <button pButton type="button" label="Novo" class="ui-button-info"
+                (click)="novo()"></button>
+        <a routerLink="/usuarios">Voltar para a pesquisa</a>
+      </div>
+    </div>
+  </form>
+</div>
